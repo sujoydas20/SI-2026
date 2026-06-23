@@ -1,13 +1,13 @@
-from math import factorial as fac
+from math import comb
+from functools import cache
+
+@cache
 # this just the choose function with x choose y
 def ch(x,y):
     if x < y:
         return 0
-    elif x == y:
-        return 1
     else:
-        n = (fac(x)/(fac(y)*fac(x-y)))
-        return n 
+        return comb(x,y) 
 # given a index this function gives out the corresponding occupation string 
 def com(n,x,y):
     l = []
@@ -36,7 +36,4 @@ def per(x,y):
         l.append(com(i+1,x,y))
     return l
 
-x = int(input("enter the number of orbitals"))
-y = int(input("enter the number of electrons"))
-print(per(x,y))
 
