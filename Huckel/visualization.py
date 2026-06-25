@@ -8,12 +8,14 @@ import matplotlib.cm as cm
 import huckel_main
 
 def o_p(N):
-    if N == 1: return [(0.5, 0.5)]
-    return [(i/(N-1), 0.0) for i in range(N)]
+    if N == 1: return [(0.0, 0.0)]
+    return [(i, 0.0) for i in range(N)]
 
 def c_p(N):
-    return [(math.cos(math.pi/2 - 2*math.pi*i/N),
-             math.sin(math.pi/2 - 2*math.pi*i/N)) for i in range(N)]
+    pitch = 1.0
+    radius = pitch * N / (2 * math.pi)
+    return [(radius*math.cos(math.pi/2 - 2*math.pi*i/N),
+         radius*math.sin(math.pi/2 - 2*math.pi*i/N)) for i in range(N)]
 
 def energy_l(lam, tol=1e-6):
     if abs(lam) < tol: return r'$\alpha$'
@@ -27,9 +29,11 @@ def draw_mo(ax, coeffs, x, N):
     pos  = c_p(N) if is_c else o_p(N)
     xs   = [p[0] for p in pos]; ys = [p[1] for p in pos]
     xm   = (min(xs)+max(xs))/2;  ym = (min(ys)+max(ys))/2
-    span = max(max(xs)-min(xs), max(ys)-min(ys), 1e-9)
-    def n_(p): return (0.5+(p[0]-xm)/span*0.72, 0.5+(p[1]-ym)/span*0.72)
-    npos = [n_(p) for p in pos]
+    npos = [(p[0]-xm, p[1]-ym) for p in pos]
+
+    margin = 0.6
+    xr = max([abs(p[0]) for p in npos] + [0.1]) + margin
+    yr = max([abs(p[1]) for p in npos] + [0.1]) + margin
 
     for i in range(len(npos)-1):
         ax.plot([npos[i][0],npos[i+1][0]], [npos[i][1],npos[i+1][1]],
@@ -40,7 +44,7 @@ def draw_mo(ax, coeffs, x, N):
 
     mags    = [abs(c) for c in coeffs]
     max_mag = max(mags) if max(mags) > 1e-10 else 1.0
-    R       = 0.5 / (N + 1)
+    R       = 0.32
     hsv     = plt.get_cmap('hsv')
 
     for (cx,cy), coeff in zip(npos, coeffs):
@@ -59,7 +63,7 @@ def draw_mo(ax, coeffs, x, N):
             ax.add_patch(mpatches.Circle((cx,cy-r), r, color=cn, zorder=3))
         ax.plot(cx, cy, 'ko', ms=3, zorder=5)
 
-    ax.set_xlim(0,1); ax.set_ylim(0,1)
+    ax.set_xlim(-xr, xr); ax.set_ylim(-yr, yr)
     ax.set_aspect('equal'); ax.axis('off')
 
 def p_o(N, x, tol=1e-6):
@@ -76,7 +80,7 @@ def p_o(N, x, tol=1e-6):
 
     # figure dimensions (inches)
     spec_in = 2.5
-    mo_in   = 1.6          # per MO column
+    mo_in   = min(1.6 + 0.35 * max(0, N - 2), 4.0)     # MO column widens modestly with N, capped
     row_in  = 1.6          # per energy row
     fig_w   = spec_in + max_deg*mo_in + 0.2
     fig_h   = n_grp*row_in + 0.9
