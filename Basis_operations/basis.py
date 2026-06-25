@@ -73,8 +73,8 @@ def per(x,y):
   #Recursion term
   for i in range(y+1):
 
-    a = per(x//2, i)
-    b = per(x - x//2, y-i)
+    a = per(x//2, y-i)
+    b = per(x - x//2, i)
 
     for p in a:
       for q in b:
@@ -87,7 +87,7 @@ def per(x,y):
 def binary_hash(l):
     k = []
     for i in l:
-      j = "".join(i)
+      j = "".join(str(k) for k in i)
       k.append(int(j,2))
     return k
 

@@ -51,3 +51,9 @@ def plus(l1,l2):
   else:
     c.append(merge(l1,l2))
     return(c)
+#this function creates the ground state of given n and k in binary hashing
+def gr(x,y):
+    l = b(0)
+    for i in range(y):
+        l = tg(l,x-i)
+    return l
