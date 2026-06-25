@@ -36,4 +36,5 @@ def per(x,y):
         l.append(com(i+1,x,y))
     return l
 
-
+if __name__ == "__main__":
+    print(per(5,3))
