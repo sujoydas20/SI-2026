@@ -39,13 +39,7 @@ def per(x,y):
 #this the creation and annihilation operator together
 #the first argument is the index of creation operator and the second argument is index of the annihilation operator ,
 #the third one is the combination in combinadic representation
-def ca(y,x,l):
-    k = set(l)
-    if x not in k:
-        return 0, None
-    if y in k:
-        return 0, None
-    def a(x,l): #this is the annihilation operator
+def a(x,l): #this is the annihilation operator
         g = 0
         for i in range(1,len(l)+1):
             if l[-i] == x:
@@ -53,7 +47,7 @@ def ca(y,x,l):
                 break
             g += 1
         return g,l
-    def c(y,l): #this is the creation operator
+def c(y,l): #this is the creation operator
         h = 0
         for i in range(1,len(l)+1):
             if i == len(l):
@@ -63,13 +57,15 @@ def ca(y,x,l):
                 break
             h += 1
         return h,l
+def ca(y,x,l):
+    k = set(l)
+    if x not in k: #checks whether orbital with x index is occupied or not
+        return 0, None
+    if y in k:  #checks whether orbital with y index is occupied or not
+        return 0, None
     
     g,l1 = a(x,l)
     h,l2 = c(y,l1)
 
     return (g+h)%2,l2
 
-x,l = ca(4,2,[3,2,0])
-
-print(x)
-print(l)
