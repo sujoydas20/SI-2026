@@ -40,7 +40,7 @@ def draw_mo(ax, coeffs, x, N):
 
     mags    = [abs(c) for c in coeffs]
     max_mag = max(mags) if max(mags) > 1e-10 else 1.0
-    R       = 0.13
+    R       = 0.5 / (N + 1)
     hsv     = plt.get_cmap('hsv')
 
     for (cx,cy), coeff in zip(npos, coeffs):
