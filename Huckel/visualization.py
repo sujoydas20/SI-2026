@@ -69,6 +69,12 @@ def draw_mo(ax, coeffs, x, N):
 def p_o(N, x, tol=1e-6):
     lams, vecs = huckel_main.fun(N, x)
 
+    # ensure energies are ordered (most bonding/lowest first → most
+    # antibonding/highest last), since huckel_main.fun doesn't guarantee this
+    order = np.argsort(lams)[::-1]      # descending lam = ascending energy (E = α + λβ, β<0)
+    lams  = [lams[k] for k in order]
+    vecs  = [vecs[k] for k in order]
+
     # group degenerate levels (index 0 = lowest energy)
     groups, i = [], 0
     while i < N:
