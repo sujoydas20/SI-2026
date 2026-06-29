@@ -35,7 +35,11 @@ def ca(x,y,z): #creation and annihilation together
     j,j1 = c(x,i1) # j tracks phase change from action of creation operator
     return (i+j)%2,j1
 
-def nu(x,l):
+def nu(x,l): #number operator for spin orbital
     e = ((l>>(con.n-1-x))&1)
     return e
 
+def nus(x,l): #number operator for spatial orbital
+    e = ((l>>(con.n-1-x))&1)
+    r = ((l>>(con.n-x))&1)
+    return e+r

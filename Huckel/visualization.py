@@ -159,3 +159,4 @@ def p_o(N, x, tol=1e-6):
     plt.savefig(out, dpi=150, bbox_inches='tight')
     plt.show()
     print(f"Saved → {out}")
+
