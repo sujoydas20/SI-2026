@@ -2,9 +2,10 @@ import math
 import cmath
 import numpy as np
 from . import visualization as vis
+import config as con
 
 def fun(N,x):
-  if x == "o":
+  if x == "0":
     eval = []
     for i in range(N):
       eval.append(2*math.cos((i+1)*math.pi*(1.0/(N+1))))
@@ -16,7 +17,7 @@ def fun(N,x):
       evec.append(l)
       l = []
     return eval,evec
-  elif x == "c":
+  elif x == "1":
     eval = []
     for i in range(N):
       eval.append(math.cos(2*(i)*math.pi*(1.0/N)))
@@ -42,12 +43,9 @@ def fun_n(m):
     return eval,evec
 
 def hu_main():
-    a = input("is the system a open chain or monocyclic(y/n):").strip().lower()
-    if not(a == "y") and not(a == "n"):
-        print("invalid input,enter either(y/n):")
-    if a == "y":
-        x = int(input("enter the number of atoms:"))
-        y = input("open chain or monocyclic(o/c)").strip().lower()
+    x = con.m
+    y = con.x_huc
+    if y == 0 or y == 1:    
         eval,evec = fun(x,y)
         b = input("visualize the orbitals(y/n):").strip().lower()
         if not(b=="y") and not(b=="n"):
@@ -57,8 +55,8 @@ def hu_main():
         elif b == "n":
             print(eval)
             print(evec)
-    elif a== "n":
-        n = int(input("enter the order of the adjacency matrix"))
+    elif y == "2":
+        n = con.m
         print("input the adjacency matrix")
         m = [] 
         for i in range(n): 
