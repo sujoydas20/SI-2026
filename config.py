@@ -12,27 +12,10 @@ a = 1 #onsite energy
 b = 1 #hopping parameter
 u = 1 #intrasite repulsion parameter
 
-global e_r,rij,r
-e_r = 8.854e-12
-rij = 1.40e-10
-r = np.zeros((m,m))
-
-def ini1():
-    global n,k,c,m,per
-
-    n = int(input("input the number of spin orbitals"))
-    k = int(input("enter the number of electrons"))
-    per = input("is the system open or closed(0/1):")
+e_r = 8.854e-12 #Relative permittivity
+rij = 1.40e-10 #Bond length
+r = np.zeros((m,m)) #Distance matrix
     
-    c = comb(n,k)
-
-    m = n//2
-
-def ini3():
-    for i in range(m):
-        for j in range(m):
-            r[i][j] = float(input(f"input the {i}{j}th value of the matrix: "))
-
 def hu():
     global n,x_huc
     n = int(input("enter the number of atoms"))
@@ -53,4 +36,27 @@ def hr():
     b = float(input("enter the value of hopping parameter:"))
     u = float(input("enter the value of intrasite repulsion parameter:"))
 
+def ehr():
+    global n,k,c,m
+    n = int(input("enter the number of spin orbitals:"))
+    k = int(input("enter the number of electrons"))
+    c = comb(n,k)
+    m = n//2
+    global b,u,rij,e_r
+    b = float(input("enter the value of hopping parameter:"))
+    u = float(input("enter the value of intrasite repulsion parameter:"))
+    rij = float(input("enter the bond length"))
+
+def p():
+    global n,k,c,m
+    n = int(input("enter the number of spin orbitals:"))
+    k = int(input("enter the number of electrons"))
+    c = comb(n,k)
+    m = n//2
+    global b,u,r,e_r
+    b = float(input("enter the value of hopping parameter:"))
+    u = float(input("enter the value of intrasite repulsion parameter:"))
+    for i in range(m):
+        for j in range(m):
+            r[i][j] = float(input(f"input the {i+1}{j+1}th value of the distance matrix: "))
 

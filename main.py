@@ -8,8 +8,18 @@ import Hamiltonians.ext_hubbard as ex
 import Hamiltonians.ppp as p 
 import Huckel.huckel_main as hu
 
-con.ini1()
+run = input("Which Model Hamiltonian Would you like to Use(Huckel(hu)/Hubbard(hr)/Extended Hubbard(ehr)/PPP(p):)")
 
-con.ini2()
-
-hub.funk()
+match run:
+    case "hu":
+        con.hu()
+        hu.hu_main()
+    case "hr":
+        con.hr()
+        hub.main_hub()
+    case "ehr":
+        con.ehr()
+        ex.main_ext()
+    case "p":
+        con.p()
+        p.main_ppp()
