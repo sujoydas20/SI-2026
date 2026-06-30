@@ -41,5 +41,5 @@ def nu(x,l): #number operator for spin orbital
 
 def nus(x,l): #number operator for spatial orbital
     e = ((l>>(con.n-1-x))&1)
-    r = ((l>>(con.n-x))&1)
+    r = ((l>>(con.n-2-x))&1)
     return e+r

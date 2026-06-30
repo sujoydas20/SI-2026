@@ -7,6 +7,7 @@ import Basis_operations.com as com
 import Hamiltonians.ext_hubbard as ex
 import Hamiltonians.ppp as p 
 import Huckel.huckel_main as hu
+import diagonalization as di
 
 run = input("Which Model Hamiltonian Would you like to Use(Huckel(hu)/Hubbard(hr)/Extended Hubbard(ehr)/PPP(p):)")
 
@@ -16,10 +17,28 @@ match run:
         hu.hu_main()
     case "hr":
         con.hr()
-        hub.main_hub()
+        mat = hub.main_hub()
+        va,ve = di.scispa(mat)
+        x = input("Print the eigenvectors and eigenvalues(0/1):")
+        if x == "1":
+            print(va)
+            print(ve)
+        
     case "ehr":
         con.ehr()
-        ex.main_ext()
+        mat = ex.main_ext()
+        va,ve = di.scispa(mat)
+        x = input("Print the eigenvectors and eigenvalues(0/1):")
+        if x == "1":
+            print(va)
+            print(ve)
+        
     case "p":
         con.p()
-        p.main_ppp()
+        mat = p.main_ppp()
+        va,ve = di.scispa(mat)
+        x = input("Print the eigenvectors and eigenvalues(0/1):")
+        if x == "1":
+            print(va)
+            print(ve)
+        

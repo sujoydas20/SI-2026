@@ -71,18 +71,18 @@ def dp(l1,l2):
     return 0
         
 def main_hub():
-    u = basis.binary_hash(basis.per(con.n,con.k))
+    bas = con.ba
     mat1 = np.zeros((con.c,con.c))
     for i in range(con.c):
         for j in range(con.c):
-            hop = hopp(u[j])
+            hop = hopp(bas[j])
             if i == j:
-                mat1[i][j] = hub(u[j])*con.u  # diagonal
+                mat1[i][j] = hub(bas[j])*con.u  # diagonal
             else:
                 if hop is not None:
-                    mat1[i][j] = dp(u[i], hop)*con.b  # off-diagonal
+                    mat1[i][j] = dp(bas[i], hop)*con.b  # off-diagonal
 
-    print(mat1)
+    return mat1
 
 
 
