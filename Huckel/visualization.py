@@ -25,7 +25,9 @@ def energy_l(lam, tol=1e-6):
     return rf'$\alpha {sign} {abs(lam):g}\beta$'
 
 def draw_mo(ax, coeffs, x, N):
-    is_c = x == "c"
+    # accept both the single-letter codes ('o'/'c') and huckel_main's
+    # numeric codes ('0' for open, '1' for closed)
+    is_c = x == "c" or x == "1"
     pos  = c_p(N) if is_c else o_p(N)
     xs   = [p[0] for p in pos]; ys = [p[1] for p in pos]
     xm   = (min(xs)+max(xs))/2;  ym = (min(ys)+max(ys))/2
@@ -67,7 +69,9 @@ def draw_mo(ax, coeffs, x, N):
     ax.set_aspect('equal'); ax.axis('off')
 
 def p_o(N, x, tol=1e-6):
-    lams, vecs = huckel_main.fun(N, x)
+    # huckel_main.fun expects numeric codes: "0" (open) or "1" (closed).
+    fun_x = "0" if x == "o" else ("1" if x == "c" else x)
+    lams, vecs = huckel_main.fun(N, fun_x)
 
     # ensure energies are ordered (most bonding/lowest first → most
     # antibonding/highest last), since huckel_main.fun doesn't guarantee this
@@ -136,7 +140,8 @@ def p_o(N, x, tol=1e-6):
             draw_mo(ax, evec, x, N)
 
     # legend / colorbar
-    if x == "o":
+    # treat both 'o' and '0' as open-chain
+    if x == "o" or x == "0":
         p1 = mpatches.Patch(color='#3B82F6', label='+ phase')
         p2 = mpatches.Patch(color='#F97316', label='− phase')
         fig.legend(handles=[p1,p2], loc='lower right',
@@ -151,7 +156,7 @@ def p_o(N, x, tol=1e-6):
         cbar.set_label('phase', fontsize=7)
         cb_ax.tick_params(labelsize=6)
 
-    sys_str = 'open chain' if x == 'o' else 'closed ring'
+    sys_str = 'open chain' if (x == 'o' or x == '0') else 'closed ring'
     fig.suptitle(f"Hückel MO Diagram  (N={N}, {sys_str})",
                  fontsize=11, fontweight='bold', y=0.998)
 

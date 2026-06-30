@@ -51,7 +51,10 @@ def hu_main():
         if not(b=="y") and not(b=="n"):
             print("invalid input,enter either(y/n):")
         if b == "y":
-            vis.p_o(x,y)
+          # visualization expects 'o' (open) or 'c' (closed);
+          # map the numeric input to the expected characters
+          vis_key = 'o' if y == "0" else ('c' if y == "1" else y)
+          vis.p_o(x, vis_key)
         elif b == "n":
             print(eval)
             print(evec)
