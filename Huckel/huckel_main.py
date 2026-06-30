@@ -19,16 +19,18 @@ def fun(N,x):
     return eval,evec
   elif x == "1":
     eval = []
-    for i in range(N):
-      eval.append(2*math.cos(2*(i)*math.pi*(1.0/N)))
+    for k in range(N):
+        eval.append(2*math.cos(2*math.pi*k/N))
+
     evec = []
-    l = []
-    for i in range(N):
-      for k in range(N):
-        l.append(cmath.exp(2*math.pi*1j*i*(k+1)))
-      evec.append(l)
-      l = []
-    return eval,evec
+
+    for k in range(N):
+        l = []
+        for i in range(N):
+            l.append(cmath.exp(2j*math.pi*i*k/N) / math.sqrt(N))
+        evec.append(l)
+
+    return eval, evec
   else :
      raise ValueError("enter either o or c")
 
