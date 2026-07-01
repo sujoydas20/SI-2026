@@ -7,7 +7,7 @@ import Basis_operations.com as com
 import Hamiltonians.ext_hubbard as ex
 import Hamiltonians.ppp as p 
 import Huckel.huckel_main as hu
-import diagonalization as di
+import Basis_operations.diagonalization as di
 
 run = input("Which Model Hamiltonian Would you like to Use(Huckel(hu)/Hubbard(hr)/Extended Hubbard(ehr)/PPP(p):)")
 

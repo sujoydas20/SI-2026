@@ -11,6 +11,6 @@ def scidense(mat):
     return evals,evecs
 
 def scispa(mat):
-    evals,evecs = eigsh(mat,k=5,which = "SA")
-    return evals,evecs[:][:4]
+    evals,evecs = eigsh(mat,k=7,which = "SA")
+    return evals,evecs[:][:6]
 
