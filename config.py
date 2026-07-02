@@ -34,6 +34,7 @@ def hr():
     global b,u,ba
     b = float(input("enter the value of hopping parameter:"))
     u = float(input("enter the value of intrasite repulsion parameter:"))
+    per = int(input("is the system linear open chain or closed monocyclic(0/1)"))
     ba = bi.binary_hash(bi.per(n,k))
 
 def ehr():
@@ -45,6 +46,7 @@ def ehr():
     global b,u,e_r,ba
     b = float(input("enter the value of hopping parameter:"))
     u = float(input("enter the value of intrasite repulsion parameter:"))
+    per = int(input("is the system linear open chain or closed monocyclic(0/1)"))
     rij = float(input("enter the bond length"))
     ba = bi.binary_hash(bi.per(n,k))
     
@@ -56,6 +58,7 @@ def p():
     m = n//2
     b = float(input("enter hopping parameter: "))
     u = float(input("enter intrasite repulsion: "))
+    per = int(input("is the system linear open chain or closed monocyclic(0/1)"))
     x = input("what do you like to input a distance matrix(0) or site coordinates(1)")
     if x == "0":
         raw = input(f"enter {m}x{m} distance matrix (rows sep by ';'):")

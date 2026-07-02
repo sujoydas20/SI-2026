@@ -8,6 +8,7 @@ import Hamiltonians.ext_hubbard as ex
 import Hamiltonians.ppp as p 
 import Huckel.huckel_main as hu
 import Basis_operations.diagonalization as di
+import Basis_operations.operators as op
 
 run = input("Which Model Hamiltonian Would you like to Use(Huckel(hu)/Hubbard(hr)/Extended Hubbard(ehr)/PPP(p):)")
 
@@ -27,6 +28,10 @@ match run:
         if x == "1":
             print(fmt(va))
             print(ve)
+        y = input("Would u like to find the double occupancy of the states(0/1)")
+        if y == "1":
+            y_ = int(input("enter which state(ground->0,first excited state->1 so on...):"))
+            print(op.expval(op.double_occ,ve[:,y_]))
         
     case "ehr":
         con.ehr()
@@ -45,4 +50,5 @@ match run:
         if x == "1":
             print(fmt(va))
             print(ve)
+        
         

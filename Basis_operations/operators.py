@@ -1,6 +1,7 @@
 import config as con
 import Basis_operations.basis as ba
 import Basis_operations.binary as bi
+import numpy as np
 
 def dp(v1,v2): #it is expected that v1 is a hash of a vector and v2 is [n,# of vector] where n is a integer
     if v1 == v2[1]:
@@ -15,18 +16,22 @@ def exp(fun,evec): #this function give the expectation value of operator(fun()) 
             k += dp(i,fun(j))
     return k
 
-def double_occ(evec,i):
-    k = bi.nus(i,evec)
-    return[k,evec]
+def double_occ(evec):
+    k = 0
+    for i in range(con.m):
+        if bi.nus(2*i,evec) == 2:
+            k += 1
+    return k
 
-def opt():
-    def __init__(self,h):
-        self.opt = h
-    def op(self,l):
-        return op(l)
+def expval(f,vec):
+    k = 0
+    ba = con.ba
+    l = len(vec)
+    for i in range(l):
+        k += (np.linalg.norm(vec[i])**2)*(f(ba[i]))
+    return k
 
-def post_opt():
-    def __init__(self,h,l):
-        self.opt = h
-        self.vec = l
+
+
+
 
